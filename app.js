@@ -1,5 +1,4 @@
 import express from 'express';
-import db from './db/db';
 import bodyParser from 'body-parser';
 import router from './routes/index.js';
 

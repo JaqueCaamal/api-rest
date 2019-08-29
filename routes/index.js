@@ -1,6 +1,6 @@
 import express from 'express';
 import db from '../db/db';
-import UsersController from '../usersControllers/users';
+import * as UsersController from '../controllers/UserController';
 
 const router = express.Router();
 router.get('/api/v1/users', UsersController.getAllUsers);
