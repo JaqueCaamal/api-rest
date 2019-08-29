@@ -30,17 +30,26 @@ import db from '../db/db';
     if(!req.body.firstName || !req.body.lastName) {
         return res.status(400).send({
           ok: 'false',
-          message: 'firstName and lastName are mandatory'
+          error: [{
+            field: 'firstName and lastName',
+            message: 'firstName and lastName are mandatory'
+          }]
         });
       } else if (req.body.firstName === " " || req.body.lastName === " "){
         return res.status(400).send({  
             ok: 'false',
-            message: 'firstName and lastName must be a non-empty string'
+            error: [{
+              field: 'firstName and lastName',
+              message: 'Must be a non-empty string'
+            }]
         });
       } else if(!req.body.age || (isNaN(req.body.age) || req.body.age < 0)) {
         return res.status(400).send({
           ok: 'false',
-          message: 'Age is required and must be a positive number or zero'
+          error: [{
+            field: 'age',
+            message: 'Must be a positive number or zero'
+          }]
         });
       } else {
         const user = {
@@ -102,7 +111,7 @@ import db from '../db/db';
   
     db.users.splice(itemIndex, 1, updateduser);
   
-    return res.status(201).send({
+    return res.status(200).send({
       ok: 'true',
       message: 'user added successfully',
       result: updateduser,
