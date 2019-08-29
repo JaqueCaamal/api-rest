@@ -3,9 +3,9 @@ import db from '../db/db';
 
   export function getAllUsers(_req, res) {
     return res.status(200).send({
-      success: 'true',
+      ok: 'true',
       message: 'users retrieved successfully',
-      users: db,
+      result: db,
     });
   }
 
@@ -14,14 +14,14 @@ import db from '../db/db';
     db.users.map((user) => {
       if (user.id === id) {
         return res.status(200).send({
-          success: 'true',
+          ok: 'true',
           message: 'user retrieved successfully',
-          user,
+          result: user,
         });
       } 
   });
    return res.status(404).send({
-     success: 'false',
+     ok: 'false',
      message: 'user does not exist',
     });
   }
@@ -29,17 +29,17 @@ import db from '../db/db';
   export function createUser(req, res) {
     if(!req.body.firstName || !req.body.lastName) {
         return res.status(400).send({
-          success: 'false',
+          ok: 'false',
           message: 'firstName and lastName are mandatory'
         });
       } else if (req.body.firstName === " " || req.body.lastName === " "){
         return res.status(400).send({  
-            success: 'false',
+            ok: 'false',
             message: 'firstName and lastName must be a non-empty string'
         });
       } else if(!req.body.age || (isNaN(req.body.age) || req.body.age < 0)) {
         return res.status(400).send({
-          success: 'false',
+          ok: 'false',
           message: 'Age is required and must be a positive number or zero'
         });
       } else {
@@ -51,9 +51,9 @@ import db from '../db/db';
         }
         db.users.push(user);
         return res.status(201).send({
-          success: 'true',
+          ok: 'true',
           message: 'user added successfully',
-          user
+          result: user
         })
       }
   }
@@ -71,24 +71,24 @@ import db from '../db/db';
   
     if (!userFound) {
       return res.status(404).send({
-        success: 'false',
+        ok: 'false',
         message: 'user not found',
       });
     }
   
     if (!req.body.firstName) {
       return res.status(400).send({
-        success: 'false',
+        ok: 'false',
         message: 'firstName is required',
       });
     } else if (!req.body.lastName) {
       return res.status(400).send({
-        success: 'false',
+        ok: 'false',
         message: 'lastName is required',
       });
     } else if (!req.body.age) {
       return res.status(400).send({
-        success: 'false',
+        ok: 'false',
         message: 'age is required',
       });
     }
@@ -103,9 +103,9 @@ import db from '../db/db';
     db.users.splice(itemIndex, 1, updateduser);
   
     return res.status(201).send({
-      success: 'true',
+      ok: 'true',
       message: 'user added successfully',
-      updateduser,
+      result: updateduser,
     });
   }
 
@@ -122,7 +122,7 @@ import db from '../db/db';
   
     if (!userFound) {
       return res.status(204).send({
-        success: 'false',
+        ok: 'false',
         message: 'user not found',
       });
     }
@@ -130,7 +130,7 @@ import db from '../db/db';
     db.users.splice(itemIndex, 1);
 
     return res.status(200).send({
-      success: 'true',
+      ok: 'true',
       message: 'user deleted successfuly',
     });
   }
