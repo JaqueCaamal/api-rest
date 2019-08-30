@@ -1,4 +1,4 @@
-# REST API building in Node and Express
+# REST API build on Node and Express
 
 ## Requirements
 
